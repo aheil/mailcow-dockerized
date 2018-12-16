@@ -287,9 +287,11 @@ services:
       labels:
         traefik.backend: mailcow-nginx
         traefik.docker.network: reverse_proxy
-        traefik.frontend.rule: HostRegexp:${MAILCOW_HOSTNAME},autoconfig.{domain:.*},autodiscover.{domain:.*},webmail.{domain:.*},roundcube.webmail.{domain:.*}
-        traefik.enable: "true"
+        #traefik.frontend.rule: HostRegexp:${MAILCOW_HOSTNAME},autoconfig.{domain:.*},autodiscover.{domain:.*},webmail.{domain:.*},sogo.{domain:.*}
+        traefik.frontend.rule: Host:webmail.aheil.net
+        traefik.enable: true
         traefik.port: 80
+
       networks:
         mailcow-network:
           aliases:
