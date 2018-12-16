@@ -136,6 +136,7 @@ services:
         mailcow-network:
           aliases:
             - phpfpm
+        reverse_proxy:
 
     sogo-mailcow:
       image: mailcow/sogo:1.44
@@ -283,10 +284,17 @@ services:
       restart: always
       dns:
         - ${IPV4_NETWORK:-172.22.1}.254
+      labels:
+        traefik.backend: mailcow-nginx
+        traefik.docker.network: reverse_proxy
+        traefik.frontend.rule: HostRegexp:${MAILCOW_HOSTNAME},autoconfig.{domain:.*},autodiscover.{domain:.*},webmail.{domain:.*},roundcube.webmail.{domain:.*}
+        traefik.enable: "true"
+        traefik.port: 80
       networks:
         mailcow-network:
           aliases:
             - nginx
+        reverse_proxy:
 
     acme-mailcow:
       depends_on:
@@ -407,6 +415,10 @@ networks:
       config:
         - subnet: ${IPV4_NETWORK:-172.22.1}.0/24
         - subnet: ${IPV6_NETWORK:-fd4d:6169:6c63:6f77::/64}
+  reverse_proxy:
+    external:
+      name: reverse_proxy
+
 
 volumes:
   # Storage for email files
