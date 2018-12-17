@@ -285,7 +285,7 @@ services:
       dns:
         - ${IPV4_NETWORK:-172.22.1}.254
       labels:
-        traefik.backend: mailcow-nginx
+        traefik.backend: nginx-mailcow
         traefik.docker.network: reverse_proxy
         #traefik.frontend.rule: HostRegexp:${MAILCOW_HOSTNAME},autoconfig.{domain:.*},autodiscover.{domain:.*},webmail.{domain:.*},sogo.{domain:.*}
         traefik.frontend.rule: Host:webmail.aheil.net
