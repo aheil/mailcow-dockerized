@@ -290,7 +290,7 @@ services:
         #traefik.frontend.rule: HostRegexp:${MAILCOW_HOSTNAME},autoconfig.{domain:.*},autodiscover.{domain:.*},webmail.{domain:.*},sogo.{domain:.*}
         traefik.frontend.rule: Host:webmail.aheil.net
         traefik.enable: true
-        traefik.port: 80
+        traefik.port: 9000
 
       networks:
         mailcow-network:
