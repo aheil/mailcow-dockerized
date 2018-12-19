@@ -290,7 +290,7 @@ services:
         #traefik.frontend.rule: HostRegexp:${MAILCOW_HOSTNAME},autoconfig.{domain:.*},autodiscover.{domain:.*},webmail.{domain:.*},sogo.{domain:.*}
         traefik.frontend.rule:  HostRegexp:${MAILCOW_HOSTNAME},mailcow.{domain:.*},webmail.{domain:.*},sogo.{domain:.*}
         traefik.enable: true
-        traefik.port: 9000
+        traefik.port: 80
 
       networks:
         mailcow-network:
