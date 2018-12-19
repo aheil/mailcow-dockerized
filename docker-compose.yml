@@ -292,8 +292,8 @@ services:
         traefik.docker.network: reverse_proxy
         #traefik.frontend.rule: HostRegexp:${MAILCOW_HOSTNAME},autoconfig.{domain:.*},autodiscover.{domain:.*},webmail.{domain:.*},sogo.{domain:.*}
         #traefik.frontend.rule:  HostRegexp:${MAILCOW_HOSTNAME},mailcow.{domain:.*},webmail.{domain:.*},sogo.{domain:.*}
-        #traefik.frontend.rule: Host:mailcow.aheil.de, webmail.aheil.de
-        traefik.frontend.rule: HostRegexp:${MAILCOW_HOSTNAME},autoconfig.{domain:.*},autodiscover.{domain:.*},webmail.{domain:.*},mailcow.{domain:.*}
+        traefik.frontend.rule: Host:mailcow.aheil.de, webmail.aheil.de, mail.aheil.de, autoconfig.aheil.de, autodiscover.aheil.de
+        #traefik.frontend.rule: HostRegexp:${MAILCOW_HOSTNAME},autoconfig.{domain:.*},autodiscover.{domain:.*},webmail.{domain:.*},mailcow.{domain:.*}
 
         traefik.enable: true
         traefik.port: 80
