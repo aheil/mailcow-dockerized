@@ -278,10 +278,12 @@ services:
         - ./data/conf/rspamd/meta_exporter:/meta_exporter:ro
       volumes_from:
         - sogo-mailcow
-# Ports not used, traefik.port=8 used instead      
-#      ports:
+      ports:
+        - 80
+# NOr Ports exposed, traefik.port=80 used instead  
 #        - "${HTTPS_BIND:-0.0.0.0}:${HTTPS_PORT:-443}:${HTTPS_PORT:-443}"
 #        - "${HTTP_BIND:-0.0.0.0}:${HTTP_PORT:-80}:${HTTP_PORT:-80}"
+
       restart: always
       dns:
         - ${IPV4_NETWORK:-172.22.1}.254
