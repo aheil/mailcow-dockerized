@@ -170,6 +170,7 @@ services:
       volumes:
         - /opt/traefik/ssl/mailcow.aheil.de.crt:/etc/ssl/mail/cert.pem:ro
         - /opt/traefik/ssl/mailcow.aheil.de.key:/etc/ssl/mail/key.pem:ro
+        - ./data/assets/ssl/dhparams.pem:/etc/ssl/mail/dhparams.pem:ro
         - ./data/conf/dovecot:/usr/local/etc/dovecot
 #        - ./data/assets/ssl:/etc/ssl/mail/:ro
         - ./data/conf/sogo/:/etc/sogo/
@@ -214,6 +215,7 @@ services:
       volumes:
         - /opt/traefik/ssl/mailcow.aheil.de.crt:/etc/ssl/mail/cert.pem:ro
         - /opt/traefik/ssl/mailcow.aheil.de.key:/etc/ssl/mail/key.pem:ro
+        - ./data/assets/ssl/dhparams.pem:/etc/ssl/mail/dhparams.pem:ro
         - ./data/conf/postfix:/opt/postfix/conf
 #        - ./data/assets/ssl:/etc/ssl/mail/:ro
         - postfix-vol-1:/var/spool/postfix
