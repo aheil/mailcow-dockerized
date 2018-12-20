@@ -168,8 +168,10 @@ services:
       cap_add:
         - NET_BIND_SERVICE
       volumes:
+        - /opt/traefik/ssl/mailcow.aheil.de.crt:/etc/ssl/mail/cert.pem:ro
+        - /opt/traefik/ssl/mailcow.aheil.de.key:/etc/ssl/mail/key.pem:ro
         - ./data/conf/dovecot:/usr/local/etc/dovecot
-        - ./data/assets/ssl:/etc/ssl/mail/:ro
+#        - ./data/assets/ssl:/etc/ssl/mail/:ro
         - ./data/conf/sogo/:/etc/sogo/
         - vmail-vol-1:/var/vmail
         - vmail-attachments-vol-1:/var/attachments
@@ -210,8 +212,10 @@ services:
       image: mailcow/postfix:1.27
       build: ./data/Dockerfiles/postfix
       volumes:
+        - /opt/traefik/ssl/mailcow.aheil.de.crt:/etc/ssl/mail/cert.pem:ro
+        - /opt/traefik/ssl/mailcow.aheil.de.key:/etc/ssl/mail/key.pem:ro
         - ./data/conf/postfix:/opt/postfix/conf
-        - ./data/assets/ssl:/etc/ssl/mail/:ro
+#        - ./data/assets/ssl:/etc/ssl/mail/:ro
         - postfix-vol-1:/var/spool/postfix
         - crypt-vol-1:/var/lib/zeyple
         - rspamd-vol-1:/var/lib/rspamd
@@ -279,8 +283,6 @@ services:
       volumes_from:
         - sogo-mailcow
       #ports:
-      #  - 80
-#       No Ports exposed, traefik.port=80 used instead  
 #        - "${HTTPS_BIND:-0.0.0.0}:${HTTPS_PORT:-443}:${HTTPS_PORT:-443}"
 #        - "${HTTP_BIND:-0.0.0.0}:${HTTP_PORT:-80}:${HTTP_PORT:-80}"
 
@@ -290,11 +292,8 @@ services:
       labels:
         traefik.backend: nginx-mailcow
         traefik.docker.network: reverse_proxy
-        #traefik.frontend.rule: HostRegexp:${MAILCOW_HOSTNAME},autoconfig.{domain:.*},autodiscover.{domain:.*},webmail.{domain:.*},sogo.{domain:.*}
-        #traefik.frontend.rule:  HostRegexp:${MAILCOW_HOSTNAME},mailcow.{domain:.*},webmail.{domain:.*},sogo.{domain:.*}
         traefik.frontend.rule: Host:mailcow.aheil.de, webmail.aheil.de, mail.aheil.de, autoconfig.aheil.de, autodiscover.aheil.de
         #traefik.frontend.rule: HostRegexp:${MAILCOW_HOSTNAME},autoconfig.{domain:.*},autodiscover.{domain:.*},webmail.{domain:.*},mailcow.{domain:.*}
-
         traefik.enable: true
         traefik.port: 80
 
